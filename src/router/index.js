@@ -3,10 +3,10 @@ import HomeView from '../views/HomeView.vue';
 import NotFound from '@/components/error/NotFound.vue';
 import BoardView from '@/views/board/BoardView.vue';
 
-import SampleList from '@/views/board/SampleListView.vue';
-// import SampleDetail from '@/views/board/SampleDetailView.vue';
-// import SampleEdit from '@/views/board/SampleEditView.vue';
-// import SampleCreate from '@/views/board/SampleCreateView.vue';
+import NoticeList from '@/views/board/NoticeListView.vue';
+import NoticeDetail from '@/views/board/NoticeDetailView.vue';
+import NoticeEdit from '@/views/board/NoticeEditView.vue';
+import NoticeCreate from '@/views/board/NoticeCreateView.vue';
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,15 +22,30 @@ const router = createRouter({
 			component: NotFound,
 		},
 		{
-			path: '/boardView',
+			path: '/board',
 			name: 'BoardView',
 			component: BoardView,
 			children: [
 				{
-					path: '/board/notice',
-					// alias: '/board/notice',
-					name: 'SampleList',
-					component: SampleList,
+					path: '',
+					alias: 'notice',
+					name: 'NoticeList',
+					component: NoticeList,
+				},
+				{
+					path: 'notice/:id',
+					name: 'NoticeDetail',
+					component: NoticeDetail,
+				},
+				{
+					path: 'notice/:id/edit',
+					name: 'NoticeEdit',
+					component: NoticeEdit,
+				},
+				{
+					path: 'notice/create',
+					name: 'NoticeCreate',
+					component: NoticeCreate,
 				},
 			],
 		},

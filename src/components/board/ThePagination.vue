@@ -18,7 +18,7 @@
 			</li>
 		</ol>
 		<i
-			v-if="props.nowPage < props.totalPage"
+			v-if="props.nowPage < totalPage"
 			class="fa-solid fa-chevron-right"
 			@click="changePage(props.nowPage + 1)"
 		>
@@ -31,25 +31,30 @@
 import { computed } from 'vue';
 
 const props = defineProps({
+	totalCount: { type: Number, default: 0 },
 	nowPage: { type: Number, default: 1 },
-	totalPage: { type: Number, default: 0 },
+	rowCount: { type: Number, default: 10 },
 });
 const emit = defineEmits(['changePage']);
+const totalPage = computed(() => {
+	return Math.max(Math.round(props.totalCount / props.rowCount), 1);
+});
 
 const PAGE_BAR_COUNT = 5; // page 버튼 표시 수
 const pageList = computed(() => {
-	let pageCount = Math.min(PAGE_BAR_COUNT, props.totalPage);
+	// page 버튼 목록
+	let pageCount = Math.min(PAGE_BAR_COUNT, totalPage.value);
 	let start = props.nowPage - Math.ceil((pageCount - 1) / 2);
 	let end = props.nowPage + Math.ceil((pageCount - 1) / 2);
 	// console.log({ start, end });
 
-	if (props.totalPage < end) {
-		let gap = end - props.totalPage;
-		end = Math.min(end - gap, props.totalPage);
+	if (totalPage.value < end) {
+		let gap = end - totalPage.value;
+		end = Math.min(end - gap, totalPage.value);
 		start = Math.max(1, start - gap);
 	} else if (start < 1) {
 		let gap = 1 - start;
-		end = Math.min(end + gap, props.totalPage);
+		end = Math.min(end + gap, totalPage.value);
 		start = Math.max(start + gap, 1);
 	}
 	// console.log({ start, end });

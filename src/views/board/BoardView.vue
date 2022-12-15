@@ -2,29 +2,20 @@
 	<div class="main_content">
 		<div class="content_tit">
 			<ul>
-				<li class="list">
-					<RouterLink
-						:to="{ name: 'SampleList', replace: true }"
-						class="nav-link"
-						active-class="active"
+				<RouterLink
+					:to="{ name: 'NoticeList', replace: true }"
+					custom
+					v-slot="{ href }"
+				>
+					<li
+						class="list"
+						:class="$route.path.indexOf(href) === 0 ? 'active' : ''"
 					>
-						공지사항
-					</RouterLink>
-				</li>
+						<a class="nav-link" :href="href"> 공지사항 </a>
+					</li>
+				</RouterLink>
 				<li class="list">게시판</li>
 			</ul>
-			<span class="search_bx">
-				<input
-					class="search"
-					id="search"
-					type="text"
-					@keyup.enter="searchName"
-					placeholder="검색어를 입력해 주세요"
-				/>
-				<span @click="searchName">
-					<i class="search_icon"></i>
-				</span>
-			</span>
 		</div>
 		<router-view></router-view>
 	</div>
@@ -55,9 +46,9 @@ import { RouterLink } from 'vue-router';
 	color: rgb(185, 24, 40);
 }
 
-@media (max-width: 1000px) {
+/* @media (max-width: 1000px) {
 	.content_tit ul {
 		margin-bottom: 30px;
 	}
-}
+} */
 </style>

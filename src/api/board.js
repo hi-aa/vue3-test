@@ -1,14 +1,14 @@
 import axios from 'axios';
-// const regId = 'test';
+const REG_ID = 'test';
 
 /** 목록 조회 */
-export async function getNoticeList(params) {
+export async function fetchNoticeList(params) {
 	return await axios.get('/system/eOrderNotice/eOrderNoticeListData', {
 		params: params,
 	});
 }
 /** 상세 조회 */
-export function getSample(noticeNo) {
+export function fetchNoticeDetail(noticeNo) {
 	return axios.get('/system/eOrderNotice/eOrderNoticeDetailData', {
 		params: { noticeNo: noticeNo },
 	});
@@ -20,14 +20,15 @@ export function getSample(noticeNo) {
 // { pointCount: 10, offsetData: 1 }
 
 /** 저장 */
-// export function saveSample(strParam) {
-// 	return axios.post('/system/eOrderNotice/eOrderNoticeSaveData', strParam);
-// }
+export function saveNotice(strParam) {
+	return axios.post('/system/eOrderNotice/eOrderNoticeSaveData', strParam);
+}
 
 /** 삭제 */
-// export function deleteSample(noticeNo) {
-// 	return axios.delete(
-// 		'/system/eOrderNotice/eOrderNoticeDeleteData',
-// 		`noticeNo=${noticeNo}&compCd=5200&regid=${regId}`,
-// 	);
-// }
+export function deleteNotice(noticeNo) {
+	return axios.post(
+		'/system/eOrderNotice/eOrderNoticeDeleteData',
+		// { regId: REG_ID, noticeNo: noticeNo },
+		`regId=${REG_ID}&noticeNo=${noticeNo}`,
+	);
+}
