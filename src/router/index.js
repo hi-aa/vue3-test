@@ -25,10 +25,10 @@ const router = createRouter({
 			path: '/board',
 			name: 'BoardView',
 			component: BoardView,
+			redirect: '/board/notice', // default 표시
 			children: [
 				{
-					path: '',
-					alias: 'notice',
+					path: 'notice',
 					name: 'NoticeList',
 					component: NoticeList,
 				},

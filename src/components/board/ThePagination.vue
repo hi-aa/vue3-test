@@ -24,7 +24,7 @@
 		>
 		</i>
 	</div>
-	<!-- <div>Total: {{ props.totalCount }}</div> -->
+	<div>Total: {{ props.totalCount }}</div>
 </template>
 
 <script setup>

@@ -42,7 +42,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { saveNotice } from '@/api/board.js';
+// import { saveNotice } from '@/api/board.js';
 
 const router = useRouter();
 const form = ref({});
@@ -81,16 +81,16 @@ const saveNoticeDetail = async () => {
 	strParam += '&newYn=Y&compCd=5200';
 	console.log(strParam);
 
-	const result = await saveNotice(strParam);
-	console.log(result.data.data.noticeNo);
-	alert(result.data.resultMessage);
+	// const result = await saveNotice(strParam);
+	// console.log(result.data.data.noticeNo);
+	// alert(result.data.resultMessage);
 
-	if (result.data.resultCode == 200) {
-		router.push({
-			name: 'NoticeDetail',
-			params: { id: result.data.data.noticeNo },
-		});
-	}
+	// if (result.data.resultCode == 200) {
+	// 	router.push({
+	// 		name: 'NoticeDetail',
+	// 		params: { id: result.data.data.noticeNo },
+	// 	});
+	// }
 };
 </script>
 

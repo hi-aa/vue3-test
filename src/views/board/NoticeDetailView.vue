@@ -18,19 +18,24 @@
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
-import { fetchNoticeDetail, deleteNotice } from '@/api/board.js';
-import { ref } from 'vue';
+// import { fetchNoticeDetail, deleteNotice } from '@/api/board.js';
+import { ref, computed } from 'vue';
 
 const route = useRoute();
 const router = useRouter();
+const store = useStore();
+
 const id = route.params.id;
 const form = ref({});
+// const form = computed(() => {
+// 	store.state.notice.
+// });
 
 /* 상세 조회 */
 const getNoticeDetail = async () => {
-	const response = await fetchNoticeDetail(id);
-	// console.log(response.data.data);
-	form.value = { ...response.data.data }; // 객체 복사해서 대입
+	// const response = await fetchNoticeDetail(id);
+	// // console.log(response.data.data);
+	// form.value = { ...response.data.data }; // 객체 복사해서 대입
 };
 getNoticeDetail();
 
@@ -45,11 +50,11 @@ const goEditPage = () => {
 };
 /* 삭제 */
 const deleteNoticeDetail = async () => {
-	const response = await deleteNotice(id);
-	alert(response.data.resultMessage);
-	if (response.data.resultCode === 200) {
-		goListPage();
-	}
+	// const response = await deleteNotice(id);
+	// alert(response.data.resultMessage);
+	// if (response.data.resultCode === 200) {
+	// 	goListPage();
+	// }
 };
 </script>
 

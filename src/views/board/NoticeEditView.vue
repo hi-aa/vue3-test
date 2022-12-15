@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-import { fetchNoticeDetail, saveNotice } from '@/api/board.js';
+// import { fetchNoticeDetail, saveNotice } from '@/api/board.js';
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -40,25 +40,25 @@ const form = ref({});
 
 /* 상세 조회 */
 const getNoticeDetail = async () => {
-	const response = await fetchNoticeDetail(id);
-	const noticeInfo = (({
-		compCd,
-		noticeNo,
-		title,
-		contents,
-		noticeYn,
-		regDt,
-		regId,
-	}) => ({
-		compCd,
-		noticeNo,
-		title,
-		contents,
-		noticeYn,
-		regDt,
-		regId,
-	}))(response.data.data);
-	form.value = noticeInfo;
+	// const response = await fetchNoticeDetail(id);
+	// const noticeInfo = (({
+	// 	compCd,
+	// 	noticeNo,
+	// 	title,
+	// 	contents,
+	// 	noticeYn,
+	// 	regDt,
+	// 	regId,
+	// }) => ({
+	// 	compCd,
+	// 	noticeNo,
+	// 	title,
+	// 	contents,
+	// 	noticeYn,
+	// 	regDt,
+	// 	regId,
+	// }))(response.data.data);
+	// form.value = noticeInfo;
 };
 getNoticeDetail();
 
@@ -77,13 +77,13 @@ const saveNoticeDetail = async () => {
 	console.log(strParam);
 	strParam += '&newYn=N';
 
-	const result = await saveNotice(strParam);
-	// console.log(result);
-	alert(result.data.resultMessage);
+	// const result = await saveNotice(strParam);
+	// // console.log(result);
+	// alert(result.data.resultMessage);
 
-	if (result.data.resultCode == 200) {
-		goNoticeDetail();
-	}
+	// if (result.data.resultCode == 200) {
+	// 	goNoticeDetail();
+	// }
 };
 </script>
 

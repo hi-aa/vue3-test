@@ -44,17 +44,19 @@
 <script setup>
 import ListContent from '@/components/board/ListContent.vue';
 import ThePagination from '@/components/board/ThePagination.vue';
-import { fetchNoticeList } from '@/api/board.js';
-import { ref } from 'vue';
+// import { fetchNoticeList } from '@/api/board.js';
+import { ref, computed } from 'vue';
+import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
+const store = useStore();
 
-// 변수 // TODO: store 옮기기
-const noticeList = ref([]);
-const listCount = ref(1);
-const nowPage = ref(1);
+// 변수
+const noticeList = computed(() => store.state.notice.items);
+const listCount = computed(() => store.state.notice.count);
 const rowCount = 10;
+const nowPage = ref(1);
 const schTitle = ref('');
 
 // search 실행
@@ -66,40 +68,12 @@ const getNoticeList = async (page = 1) => {
 		endRow: startRow + 9,
 		schTitle: schTitle.value,
 	};
-	const { data } = await fetchNoticeList(params);
-	// console.dir(data.data);
-
-	// 목록
-	noticeList.value = data.data.list.map(item => {
-		return (({
-			compCd,
-			noticeNo,
-			title,
-			contents,
-			noticeYn,
-			hitCnt,
-			regDt,
-		}) => ({
-			compCd,
-			noticeNo,
-			title,
-			contents,
-			noticeYn,
-			hitCnt,
-			regDt,
-		}))(item);
-	});
-	// 목록 수
-	listCount.value = data.data.totCnt;
+	store.dispatch('notice/getNoticeList', params);
 };
 getNoticeList(1);
 
 /** 상세 페이지 이동 */
 const goNoticeDetail = id => {
-	// 1. 그냥 url 입력해서 이동하는 방법
-	// router.push(`/posts/${id}`);
-
-	// 2. 객체 파라메터로 이동하는 방법
 	router.push({
 		name: 'NoticeDetail', // 이름을 가지는 라우트
 		params: {
