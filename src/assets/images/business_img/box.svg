@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="795" viewBox="0 0 1280 795">
+    <defs>
+        <filter id="fm9dt0juqa" x="412" y="213" width="448" height="448" filterUnits="userSpaceOnUse">
+            <feOffset dy="43"/>
+            <feGaussianBlur stdDeviation="28" result="blur"/>
+            <feFlood flood-opacity=".051"/>
+            <feComposite operator="in" in2="blur"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+    </defs>
+    <g data-name="사각형 1499" transform="translate(639 397)" style="stroke:#d5d5d5;fill:none">
+        <rect width="641" height="398" rx="140" style="stroke:none"/>
+        <rect x=".5" y=".5" width="640" height="397" rx="139.5" style="fill:none"/>
+    </g>
+    <g data-name="사각형 1499" transform="translate(639)" style="stroke:#d5d5d5;fill:none">
+        <rect width="641" height="398" rx="140" style="stroke:none"/>
+        <rect x=".5" y=".5" width="640" height="397" rx="139.5" style="fill:none"/>
+    </g>
+    <g data-name="사각형 1499" transform="translate(0 397)" style="stroke:#d5d5d5;fill:none">
+        <rect width="640" height="398" rx="140" style="stroke:none"/>
+        <rect x=".5" y=".5" width="639" height="397" rx="139.5" style="fill:none"/>
+    </g>
+    <g data-name="사각형 1499" style="stroke:#d5d5d5;fill:none">
+        <rect width="640" height="398" rx="140" style="stroke:none"/>
+        <rect x=".5" y=".5" width="639" height="397" rx="139.5" style="fill:none"/>
+    </g>
+    <g data-name="그룹 703" transform="translate(-320 -731)">
+        <circle data-name="타원 41" cx="208" cy="208" r="208" transform="translate(748 917)" style="fill:#fff"/>
+        <g style="filter:url(#fm9dt0juqa)">
+            <g data-name="타원 42" transform="translate(816 985)" style="fill:#fafafa;stroke:#e3e3e3">
+                <circle cx="140" cy="140" r="140" style="stroke:none"/>
+                <circle cx="140" cy="140" r="139.5" style="fill:none"/>
+            </g>
+        </g>
+    </g>
+    <path d="m-9355.362-19808.545 13.907 13.908 13.907-13.908" transform="translate(9981 20019)" style="stroke:#000;stroke-width:3px;fill:none"/>
+    <path data-name="arrow" d="m-9355.362-19794.635 13.907-13.908 13.907 13.908" transform="translate(9981 20370.635)" style="stroke:#000;stroke-width:3px;fill:none"/>
+    <path data-name="arrow" d="m-9355.362-19808.545 13.907 13.908 13.907-13.908" transform="rotate(90 -14364.227 -4625.863)" style="stroke:#000;stroke-width:3px;fill:none"/>
+    <path data-name="arrow" d="m-9355.362-19808.545 13.907 13.908 13.907-13.908" transform="rotate(-90 5659.271 -14602.818)" style="stroke:#000;stroke-width:3px;fill:none"/>
+</svg>
