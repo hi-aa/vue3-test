@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import { Suspense } from 'vue';
+// import { Suspense } from 'vue';
 import { RouterLink } from 'vue-router';
 </script>
 

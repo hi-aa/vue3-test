@@ -39,7 +39,6 @@
 		@change-page="changePage"
 		@change-row-count="changeRowCount"
 	></ThePagination>
-	<!-- :row-count="rowCount" -->
 </template>
 
 <script setup>
@@ -90,7 +89,6 @@ const changePage = page => {
 };
 
 const changeRowCount = count => {
-	console.log(count);
 	rowCount.value = count;
 };
 </script>

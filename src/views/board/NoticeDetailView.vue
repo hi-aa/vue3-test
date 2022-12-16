@@ -1,5 +1,4 @@
 <template>
-	<!-- <div class="main_content"> -->
 	<div class="detailed_tit">
 		<p>Date : {{ form.regDt }}</p>
 		<h2>{{ form.title }}</h2>
@@ -13,29 +12,35 @@
 		<button class="detailed_btn" @click="goEditPage">수정</button>
 		<button class="detailed_btn" @click="deleteNoticeDetail">삭제</button>
 	</div>
-	<!-- </div> -->
+	<!-- <div v-for="no in noticeList" :key="no.noticeNo">{{ no }}</div> -->
 </template>
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
-// import { fetchNoticeDetail, deleteNotice } from '@/api/board.js';
-import { ref, computed } from 'vue';
+// import { fetchNoticeDetail } from '@/api/board.js';
+import { deleteNotice } from '@/api/board.js';
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 
 const route = useRoute();
 const router = useRouter();
 const store = useStore();
+// const noticeList = computed(() => store.state.notice.items);
+// console.log(noticeList);
 
 const id = route.params.id;
-const form = ref({});
-// const form = computed(() => {
-// 	store.state.notice.
-// });
+// const form = ref({});
+const form = computed(() => {
+	return store.state.notice.item;
+});
 
 /* 상세 조회 */
 const getNoticeDetail = async () => {
 	// const response = await fetchNoticeDetail(id);
 	// // console.log(response.data.data);
 	// form.value = { ...response.data.data }; // 객체 복사해서 대입
+
+	store.dispatch('notice/getNotice', id);
 };
 getNoticeDetail();
 
@@ -45,16 +50,15 @@ const goListPage = () => {
 };
 /* 수정 이동 */
 const goEditPage = () => {
-	// router.push(`/board/notice/${id}/edit`);
 	router.push({ name: 'NoticeEdit', params: { id } });
 };
 /* 삭제 */
 const deleteNoticeDetail = async () => {
-	// const response = await deleteNotice(id);
-	// alert(response.data.resultMessage);
-	// if (response.data.resultCode === 200) {
-	// 	goListPage();
-	// }
+	const response = await deleteNotice(id);
+	alert(response.data.resultMessage);
+	if (response.data.resultCode === 200) {
+		goListPage();
+	}
 };
 </script>
 

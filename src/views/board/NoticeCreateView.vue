@@ -7,7 +7,12 @@
 			<div class="inputline">
 				<div class="input_wrap">
 					<label for="">제목 <span>*</span></label>
-					<input type="text" class="block textbx" v-model.trim="form.title" />
+					<input
+						type="text"
+						class="block textbx"
+						v-model.trim="form.title"
+						required
+					/>
 				</div>
 			</div>
 			<div class="inputline">
@@ -42,7 +47,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-// import { saveNotice } from '@/api/board.js';
+import { saveNotice } from '@/api/board.js';
 
 const router = useRouter();
 const form = ref({});
@@ -56,10 +61,10 @@ const goListPage = () => {
 
 const saveNoticeDetail = async () => {
 	const validCheck = () => {
-		if (!form.value.title) {
-			alert('제목은 필수값입니다');
-			return false;
-		}
+		// if (!form.value.title) {
+		// 	alert('제목은 필수값입니다');
+		// 	return false;
+		// }
 		if (!form.value.contents) {
 			alert('내용은 필수값입니다');
 			return false;
@@ -79,18 +84,17 @@ const saveNoticeDetail = async () => {
 		.map(key => `${key}=${form.value[key]}`)
 		.join('&');
 	strParam += '&newYn=Y&compCd=5200';
-	console.log(strParam);
 
-	// const result = await saveNotice(strParam);
+	const result = await saveNotice(strParam);
 	// console.log(result.data.data.noticeNo);
-	// alert(result.data.resultMessage);
+	alert(result.data.resultMessage);
 
-	// if (result.data.resultCode == 200) {
-	// 	router.push({
-	// 		name: 'NoticeDetail',
-	// 		params: { id: result.data.data.noticeNo },
-	// 	});
-	// }
+	if (result.data.resultCode == 200) {
+		router.push({
+			name: 'NoticeDetail',
+			params: { id: result.data.data.noticeNo },
+		});
+	}
 };
 </script>
 
