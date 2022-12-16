@@ -2,7 +2,8 @@
 	<div class="pagination">
 		<i
 			class="fa-solid fa-chevron-left"
-			@click="props.nowPage > 1 ? changePage(props.nowPage - 1) : ''"
+			:class="checkAcitveBeforeArrow() ? '' : 'disabled'"
+			@click="checkAcitveBeforeArrow() ? changePage(props.nowPage - 1) : ''"
 		>
 		</i>
 		<ol id="numbers">
@@ -18,19 +19,11 @@
 		</ol>
 		<i
 			class="fa-solid fa-chevron-right"
-			@click="props.nowPage < totalPage ? changePage(props.nowPage + 1) : ''"
+			:class="checkActiveAfterArrow() ? '' : 'disabled'"
+			@click="checkActiveAfterArrow() ? changePage(props.nowPage + 1) : ''"
 		>
 		</i>
-
 		<div class="bcb-wrap">
-			<!-- <p class="breadcrumb">{{ rowValue }}</p>
-			<div class="snb-sbox">
-				<ul class="slide-wrap">
-					<li @click="clickSelect($event)">5</li>
-					<li @click="clickSelect($event)">10</li>
-					<li @click="clickSelect($event)">15</li>
-				</ul>
-			</div> -->
 			<select v-model="rowCount" @change="changeRowCount(rowCount)">
 				<option value="5">5</option>
 				<option value="10">10</option>
@@ -39,29 +32,31 @@
 		</div>
 	</div>
 	<div>Total: {{ props.totalCount }}</div>
+	<!-- <div>nowPage: {{ props.nowPage }}</div>
+	<div>rowCount: {{ rowCount }}</div> -->
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
 
 const props = defineProps({
-	totalCount: { type: Number, default: 0 },
-	nowPage: { type: Number, default: 1 },
-	// rowCount: { type: Number, default: 10 },
-	pageBarCount: { type: Number, default: 5 },
+	totalCount: { type: Number, default: 0 }, // 총 목록 수
+	nowPage: { type: Number, default: 1 }, // 현재 페이지
+	// rowCount: { type: Number, default: 10 }, // 한 페이지에 표시할 목록 수
+	pageBarCount: { type: Number, default: 5 }, // 페이지 버튼 표시 수
 });
 const emit = defineEmits(['changePage', 'changeRowCount']);
+
 const rowCount = ref(5);
 const totalPage = computed(() => {
 	return Math.max(Math.round(props.totalCount / rowCount.value), 1);
 });
 
+// 숫자 page 목록
 const pageList = computed(() => {
-	// page 버튼 목록
 	let pageCount = Math.min(props.pageBarCount, totalPage.value);
 	let start = props.nowPage - Math.ceil((pageCount - 1) / 2);
 	let end = props.nowPage + Math.ceil((pageCount - 1) / 2);
-	// console.log({ start, end });
 
 	if (totalPage.value < end) {
 		let gap = end - totalPage.value;
@@ -75,6 +70,15 @@ const pageList = computed(() => {
 	// console.log({ start, end });
 	return Array.from({ length: end - start + 1 }, (_, i) => i + start);
 });
+
+/** < 버튼 활성화 체크 */
+const checkAcitveBeforeArrow = () => {
+	return props.nowPage > 1;
+};
+/** > 버튼 활성화 체크 */
+const checkActiveAfterArrow = () => {
+	return props.nowPage < totalPage.value;
+};
 
 const changePage = (page = 1) => {
 	emit('changePage', page);
@@ -97,6 +101,11 @@ const changeRowCount = count => {
 	font-size: 20px;
 	color: rgb(90, 90, 90);
 	padding: 5px 15px;
+	cursor: pointer;
+}
+.pagination i.disabled {
+	color: #ccc;
+	cursor: default;
 }
 .pagination ol#numbers {
 	display: flex;

@@ -11,10 +11,21 @@
 						class="list"
 						:class="$route.path.indexOf(href) === 0 ? 'active' : ''"
 					>
-						<a class="nav-link" :href="href"> 공지사항 </a>
+						<a class="nav-link" :href="href">공지사항</a>
 					</li>
 				</RouterLink>
-				<li class="list">게시판</li>
+				<RouterLink
+					:to="{ name: 'SampleBoard', replace: true }"
+					custom
+					v-slot="{ href }"
+				>
+					<li
+						class="list"
+						:class="$route.path.indexOf(href) === 0 ? 'active' : ''"
+					>
+						<a class="nav-link" :href="href">게시판</a>
+					</li>
+				</RouterLink>
 			</ul>
 		</div>
 		<Suspense>

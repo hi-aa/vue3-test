@@ -90,5 +90,6 @@ const changePage = page => {
 
 const changeRowCount = count => {
 	rowCount.value = count;
+	changePage(1);
 };
 </script>
