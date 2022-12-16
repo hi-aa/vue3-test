@@ -5,6 +5,4 @@ export default createStore({
 	modules: {
 		notice,
 	},
-	// strict: debug,
-	// plugins: debug ? [createLogger()] : []
 });

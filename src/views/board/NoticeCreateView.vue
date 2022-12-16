@@ -61,10 +61,10 @@ const goListPage = () => {
 
 const saveNoticeDetail = async () => {
 	const validCheck = () => {
-		// if (!form.value.title) {
-		// 	alert('제목은 필수값입니다');
-		// 	return false;
-		// }
+		if (!form.value.title) {
+			alert('제목은 필수값입니다');
+			return false;
+		}
 		if (!form.value.contents) {
 			alert('내용은 필수값입니다');
 			return false;
