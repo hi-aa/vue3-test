@@ -36,9 +36,10 @@
 	<ThePagination
 		:total-count="listCount"
 		:now-page="nowPage"
-		:row-count="rowCount"
 		@change-page="changePage"
+		@change-row-count="changeRowCount"
 	></ThePagination>
+	<!-- :row-count="rowCount" -->
 </template>
 
 <script setup>
@@ -55,14 +56,15 @@ const store = useStore();
 // 변수
 const noticeList = computed(() => store.state.notice.items);
 const listCount = computed(() => store.state.notice.count);
-const rowCount = 10;
+// const rowCount = 10;
+const rowCount = ref(5);
 const nowPage = ref(1);
 const schTitle = ref('');
 
 // search 실행
 const getNoticeList = async (page = 1) => {
 	nowPage.value = page;
-	const startRow = (nowPage.value - 1) * rowCount + 1;
+	const startRow = (nowPage.value - 1) * rowCount.value + 1;
 	const params = {
 		startRow: startRow,
 		endRow: startRow + 9,
@@ -86,53 +88,9 @@ const goNoticeDetail = id => {
 const changePage = page => {
 	getNoticeList(page);
 };
-</script>
 
-<style>
-.pagination {
-	width: 100%;
-	margin-top: 20px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-.pagination i.fa-solid {
-	font-size: 20px;
-	color: rgb(90, 90, 90);
-	padding: 5px 15px;
-}
-.pagination ol#numbers {
-	display: flex;
-	justify-content: center;
-}
-.pagination ol#numbers li.pagenum {
-	padding: 5px 15px;
-	font-size: 20px;
-	font-family: 'Pretendard';
-	cursor: pointer;
-}
-.pagination ol#numbers li.pagenum.active {
-	color: rgb(185, 24, 40);
-}
-.btn_wrap {
-	display: flex;
-	justify-content: flex-end;
-	margin-top: 10px;
-}
-.write_btn {
-	background: #000;
-	color: #fff;
-	font-family: 'Pretendard';
-	font-size: 16px;
-	padding: 15px 25px;
-	transition: 0.3s;
-}
-.write_btn:hover {
-	background: rgb(185, 24, 40);
-}
-@media (max-width: 1000px) {
-	.write_btn {
-		width: 100%;
-	}
-}
-</style>
+const changeRowCount = count => {
+	console.log(count);
+	rowCount.value = count;
+};
+</script>

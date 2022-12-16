@@ -17,11 +17,15 @@
 				<li class="list">게시판</li>
 			</ul>
 		</div>
-		<router-view></router-view>
+		<Suspense>
+			<router-view></router-view>
+			<template #fallback>Loading...</template>
+		</Suspense>
 	</div>
 </template>
 
 <script setup>
+import { Suspense } from 'vue';
 import { RouterLink } from 'vue-router';
 </script>
 
