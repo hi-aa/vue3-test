@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="58.667" viewBox="0 0 64 58.667">
+    <defs>
+        <clipPath id="qwwo81pyla">
+            <path data-name="사각형 1526" style="stroke:#c31023;fill:none;stroke-width:2px" d="M0 0h64v58.667H0z"/>
+        </clipPath>
+    </defs>
+    <path data-name="패스 411" d="M27 39.5h-6" transform="translate(8 14.501)" style="stroke-linecap:round;stroke:#000;stroke-linejoin:round;fill:none;stroke-width:2px"/>
+    <g data-name="그룹 739">
+        <g data-name="그룹 738" style="clip-path:url(#qwwo81pyla)">
+            <path data-name="패스 412" d="M24.041 37H3.652A2.659 2.659 0 0 0 1 39.667V41a3.989 3.989 0 0 0 3.978 4h53.044A3.989 3.989 0 0 0 62 41v-1.333A2.659 2.659 0 0 0 59.348 37H38.959" transform="translate(0 11.999)" style="stroke-linecap:round;stroke:#000;stroke-linejoin:round;fill:none;stroke-width:2px"/>
+            <path data-name="패스 413" d="M29 9h16a4 4 0 0 1 4 4v28" transform="translate(10 3)" style="stroke-linecap:round;stroke:#000;stroke-linejoin:round;fill:none;stroke-width:2px"/>
+            <path data-name="선 11" transform="translate(5 36)" style="stroke-linecap:round;stroke:#000;stroke-linejoin:round;fill:none;stroke-width:2px" d="M0 8V0"/>
+            <circle data-name="타원 47" cx="16" cy="16" r="16" transform="translate(1 .999)" style="stroke-miterlimit:10;stroke-linecap:round;stroke:#c31023;fill:none;stroke-width:2px"/>
+            <path data-name="선 12" transform="translate(3 23.001)" style="stroke-miterlimit:10;stroke-linecap:round;stroke:#c31023;fill:none;stroke-width:2px" d="M28 0H0"/>
+            <path data-name="선 13" transform="translate(2 12)" style="stroke-miterlimit:10;stroke-linecap:round;stroke:#c31023;fill:none;stroke-width:2px" d="M0 0h30"/>
+            <ellipse data-name="타원 48" cx="6.5" cy="16" rx="6.5" ry="16" transform="translate(11 .999)" style="stroke-miterlimit:10;stroke-linecap:round;stroke:#c31023;fill:none;stroke-width:2px"/>
+        </g>
+    </g>
+    <path data-name="패스 422" d="M48 43V29h7v14zm2-2h3V31h-3zm-11 2V25h7v18zm2-2h3V27h-3zm-11 2V33h7v10zm2-2h3v-6h-3z"/>
+    <path data-name="패스 423" d="M3 0a3 3 0 1 1-3 3 3 3 0 0 1 3-3z" transform="translate(9 9)" style="fill:#fff"/>
+    <path data-name="패스 424" d="M3 0a3 3 0 1 1-3 3 3 3 0 0 1 3-3z" transform="translate(21 20)" style="fill:#fff"/>
+</svg>
