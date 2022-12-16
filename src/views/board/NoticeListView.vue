@@ -66,7 +66,7 @@ const getNoticeList = async (page = 1) => {
 	const startRow = (nowPage.value - 1) * rowCount.value + 1;
 	const params = {
 		startRow: startRow,
-		endRow: startRow + 9,
+		endRow: startRow + rowCount.value - 1,
 		schTitle: schTitle.value,
 	};
 	store.dispatch('notice/getNoticeList', params);

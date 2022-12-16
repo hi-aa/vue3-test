@@ -25,9 +25,10 @@
 		</i>
 		<div class="bcb-wrap">
 			<select v-model="rowCount" @change="changeRowCount(rowCount)">
-				<option value="5">5</option>
-				<option value="10">10</option>
-				<option value="50">50</option>
+				<!-- <option :value="3">3</option> -->
+				<option :value="5">5</option>
+				<option :value="10">10</option>
+				<option :value="50">50</option>
 			</select>
 		</div>
 	</div>
@@ -47,13 +48,13 @@ const props = defineProps({
 });
 const emit = defineEmits(['changePage', 'changeRowCount']);
 
-const rowCount = ref(5);
+const rowCount = ref(5); // default row count
 const totalPage = computed(() => {
 	return Math.max(Math.round(props.totalCount / rowCount.value), 1);
 });
 
-// 숫자 page 목록
-const pageList = computed(() => {
+/** 1. nowPage가 중간에 오도록 버튼 표시: pageBarCount는 홀수 */
+const xxpageList = computed(() => {
 	let pageCount = Math.min(props.pageBarCount, totalPage.value);
 	let start = props.nowPage - Math.ceil((pageCount - 1) / 2);
 	let end = props.nowPage + Math.ceil((pageCount - 1) / 2);
@@ -66,6 +67,25 @@ const pageList = computed(() => {
 		let gap = 1 - start;
 		end = Math.min(end + gap, totalPage.value);
 		start = Math.max(start + gap, 1);
+	}
+	console.log({ start, end });
+	return Array.from({ length: end - start + 1 }, (_, i) => i + start);
+});
+
+/** 2. 10개(pageBarCount)단위로 버튼 표시 */
+const pageList = computed(() => {
+	let pageCount = Math.min(props.pageBarCount, totalPage.value);
+	let start = 0;
+	let end = 0;
+	if (props.nowPage <= pageCount) {
+		start = 1;
+		end = pageCount;
+	} else {
+		start =
+			Math.floor((props.nowPage - 1) / props.pageBarCount) *
+				props.pageBarCount +
+			1;
+		end = Math.min(start + props.pageBarCount - 1, totalPage.value);
 	}
 	// console.log({ start, end });
 	return Array.from({ length: end - start + 1 }, (_, i) => i + start);
