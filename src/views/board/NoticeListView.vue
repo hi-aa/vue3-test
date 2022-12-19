@@ -16,13 +16,18 @@
 	<div class="content_inner">
 		<!-- 목록 -->
 		<ul id="list">
-			<li class="loop_list" v-for="notice in noticeList" :key="notice.noticeNo">
-				<listContent @click="goNoticeDetail(notice.noticeNo)">
+			<li
+				class="loop_list"
+				v-for="(notice, index) in noticeList"
+				:key="notice.noticeNo"
+			>
+				<ListContent @click="goNoticeDetail(notice.noticeNo)">
+					<template #index>{{ index }}</template>
 					<template #title>{{ notice.title }}</template>
 					<template #contents>{{ notice.contents }}</template>
 					<template #day>{{ notice.regDt }}</template>
 					<template #hitCnt>{{ notice.hitCnt }}</template>
-				</listContent>
+				</ListContent>
 			</li>
 		</ul>
 	</div>
@@ -45,7 +50,7 @@
 import ListContent from '@/components/board/ListContent.vue';
 import ThePagination from '@/components/board/ThePagination.vue';
 // import { fetchNoticeList } from '@/api/board.js';
-import { ref, computed } from 'vue';
+import { ref, computed, watchEffect } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 
@@ -55,23 +60,29 @@ const store = useStore();
 // 변수
 const noticeList = computed(() => store.state.notice.items);
 const listCount = computed(() => store.state.notice.count);
-// const rowCount = 10;
 const rowCount = ref(5);
 const nowPage = ref(1);
 const schTitle = ref('');
 
 // search 실행
-const getNoticeList = async (page = 1) => {
-	nowPage.value = page;
-	const startRow = (nowPage.value - 1) * rowCount.value + 1;
-	const params = {
-		startRow: startRow,
-		endRow: startRow + rowCount.value - 1,
-		schTitle: schTitle.value,
-	};
-	store.dispatch('notice/getNoticeList', params);
+const getNoticeList = (page = 1) => {
+	try {
+		nowPage.value = page;
+		const startRow = (nowPage.value - 1) * rowCount.value + 1;
+		const params = {
+			startRow: startRow,
+			endRow: startRow + rowCount.value - 1,
+			schTitle: schTitle.value,
+		};
+		store.dispatch('notice/getNoticeList', params);
+	} catch (error) {
+		console.log(error);
+	}
 };
-getNoticeList(1);
+
+watchEffect(() => {
+	getNoticeList(nowPage.value);
+});
 
 /** 상세 페이지 이동 */
 const goNoticeDetail = id => {
@@ -85,11 +96,12 @@ const goNoticeDetail = id => {
 
 /** 페이지 변경 */
 const changePage = page => {
-	getNoticeList(page);
+	nowPage.value = page;
 };
 
+/** rowCount 변경 */
 const changeRowCount = count => {
 	rowCount.value = count;
-	changePage(1);
+	nowPage.value = 1;
 };
 </script>
