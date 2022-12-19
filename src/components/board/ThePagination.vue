@@ -25,7 +25,6 @@
 		</i>
 		<div class="bcb-wrap">
 			<select v-model="rowCount" @change="changeRowCount(rowCount)">
-				<!-- <option :value="3">3</option> -->
 				<option :value="5">5</option>
 				<option :value="10">10</option>
 				<option :value="50">50</option>
@@ -50,7 +49,7 @@ const emit = defineEmits(['changePage', 'changeRowCount']);
 
 const rowCount = ref(5); // default row count
 const totalPage = computed(() => {
-	return Math.max(Math.round(props.totalCount / rowCount.value), 1);
+	return Math.max(Math.ceil(props.totalCount / rowCount.value), 1);
 });
 
 /** 1. nowPage가 중간에 오도록 버튼 표시: pageBarCount는 홀수 */

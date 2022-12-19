@@ -7,14 +7,13 @@ import api from '@/api/board';
 export default {
 	namespaced: true,
 	state: {
-		// 읽기전용
-		// 단순 조회 시 state에서 값 가져오기
+		// state: 읽기전용, 단순 조회 시 state에서 값 가져오기
 		items: [],
 		count: 0,
 		item: {},
 	},
 	getters: {
-		// state 값을 이용해서 계산할 것이 있으면 getter로 구현
+		// getter: state 값을 이용해서 계산할 것이 있으면 getter로 구현
 		// array 필터링, 숫자 계산 등등 쓰는듯
 		// ex) 장바구니 totalCount 계산
 		// noticeList: state => {
@@ -22,7 +21,7 @@ export default {
 		// },
 	},
 	actions: {
-		// 비동기 작업을 처리함, mutations을 실행시킴
+		// action: 비동기 작업을 처리함, mutations을 실행시킴
 		// context.state, context.getters
 		// context.commit : mutation 실행
 		// context.dispatch: 다른 action 실행
@@ -38,7 +37,7 @@ export default {
 		},
 	},
 	mutations: {
-		// state value 변경
+		// mutations: state value 변경
 		setNoticeList(state, response) {
 			const { data } = response;
 			state.items = data.data.list.map(item => {
@@ -49,6 +48,7 @@ export default {
 					contents,
 					noticeYn,
 					hitCnt,
+					regNm,
 					regDt,
 				}) => ({
 					compCd,
@@ -57,6 +57,7 @@ export default {
 					contents,
 					noticeYn,
 					hitCnt,
+					regNm,
 					regDt,
 				}))(item);
 			});

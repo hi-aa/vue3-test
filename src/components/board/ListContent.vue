@@ -1,4 +1,3 @@
-//list 내용
 <template>
 	<div class="inner_wrap">
 		<div class="inner_txt">
@@ -6,13 +5,14 @@
 				<slot name="title"></slot>
 			</p>
 			<p class="mid_txt">
+				Index: <slot name="index"></slot><br />
 				<slot name="contents"></slot>
 			</p>
 			<p v-if="$slots.day" class="sm_txt">
 				<slot name="day"></slot>
 			</p>
 		</div>
-		<div class="inner_count">
+		<div class="inner_count" v-if="$slots.hitCnt">
 			<p class="count">
 				조회수:
 				<slot name="hitCnt">0</slot>

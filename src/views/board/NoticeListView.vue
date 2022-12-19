@@ -65,7 +65,7 @@ const nowPage = ref(1);
 const schTitle = ref('');
 
 // search 실행
-const getNoticeList = (page = 1) => {
+const searchNoticeList = (page = 1) => {
 	try {
 		nowPage.value = page;
 		const startRow = (nowPage.value - 1) * rowCount.value + 1;
@@ -81,7 +81,7 @@ const getNoticeList = (page = 1) => {
 };
 
 watchEffect(() => {
-	getNoticeList(nowPage.value);
+	searchNoticeList(nowPage.value);
 });
 
 /** 상세 페이지 이동 */

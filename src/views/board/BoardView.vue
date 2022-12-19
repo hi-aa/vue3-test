@@ -28,17 +28,11 @@
 				</RouterLink>
 			</ul>
 		</div>
-		<Suspense>
-			<router-view></router-view>
-			<template #fallback>Loading...</template>
-		</Suspense>
+		<RouterView></RouterView>
 	</div>
 </template>
 
-<script setup>
-// import { Suspense } from 'vue';
-import { RouterLink } from 'vue-router';
-</script>
+<script setup></script>
 
 <style scoped>
 .content_tit ul {
