@@ -106,7 +106,8 @@ pre{font-size:13px; font-family: 'Noto Sans KR', Arial, sans-serif; white-space:
 
 input[type=text]::-ms-clear{display:none;}
 
-select{padding: 5px 35px 5px 10px; border:1px solid #d5d5d5; min-width:114px; height:45px; background: #fff url('../images/common/select.png') no-repeat right; border-radius:0; -webkit-appearance: none; -moz-appearance: none; -o-appearance: none; appearance:none; background-image:none\0/IE8+9; overflow:hidden; line-height:1\0/IE8+9; font-family:'Noto Sans KR'; font-size: 16px;  color: #8b8b8b;}
+/* url('@/assets/images/common/select.png') */
+select{padding: 5px 35px 5px 10px; border:1px solid #d5d5d5; min-width:114px; height:45px; background: #fff no-repeat right; border-radius:0; -webkit-appearance: none; -moz-appearance: none; -o-appearance: none; appearance:none; background-image:none\0/IE8+9; overflow:hidden; line-height:1\0/IE8+9; font-family:'Noto Sans KR'; font-size: 16px;  color: #8b8b8b;}
 select::-ms-expand { display: none;  }
 
 textarea.block,

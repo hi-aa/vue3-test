@@ -1,18 +1,18 @@
 <template>
-	<a href="#" class="float" @click.prevent="emits('clickFloating')">
-		<i class="fa" style="margin-top: 22px" :class="getIconClass"></i>
+	<a href="#" class="float" @click.prevent="$emit('clickEvent')">
+		<i class="fa" :class="getIconClass()" style="margin-top: 22px"></i>
 	</a>
 </template>
 
 <script setup>
-const emits = defineEmits(['clickFloating']);
 const props = defineProps({
 	iconType: {
 		type: String,
 		default: 'plus',
-		// validator: value => ['plus', 'top'].includes(value),
+		validator: value => ['plus', 'up'].includes(value),
 	},
 });
+defineEmits(['clickEvent']);
 
 const ICON_TYPE = [
 	{ type: 'plus', class: 'fa-plus' },
@@ -20,10 +20,9 @@ const ICON_TYPE = [
 ];
 
 const getIconClass = () => {
-	console.log(ICON_TYPE);
-	const item = ICON_TYPE.filter(item => item.type === props.iconType);
-	console.log(item);
-	return item.class;
+	const item = ICON_TYPE.find(item => item.type === props.iconType);
+	// console.log(item);
+	return item.class ? item.class : ICON_TYPE[0].class;
 };
 </script>
 

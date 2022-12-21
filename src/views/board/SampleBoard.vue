@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<form @submit.prevent>
+		<form @submit.prevent="saveTodo">
 			<table>
 				<colgroup>
 					<col width="120px;" />
@@ -30,7 +30,7 @@
 					</td>
 					<td>
 						<div class="sample_btn_wrap">
-							<button class="btn" @click="saveTodo">저장</button>
+							<button class="btn">저장</button>
 						</div>
 					</td>
 				</tr>
@@ -61,15 +61,23 @@
 			더보기 (Total {{ listCount }})
 		</button>
 	</div>
-	<FloatingButton icon-type="plus" @click-floating="clickttt"></FloatingButton>
 </template>
 
 <script setup>
 import CardContent from '@/components/board/CardContent.vue';
-import FloatingButton from '@/components/icons/FloatingButton.vue';
 import { fetchNoticeDetail, saveNotice } from '@/api/board';
 import { ref, computed, watchEffect } from 'vue';
 import { useStore } from 'vuex';
+
+import { useFloatingButton } from '@/hooks/floatingButton';
+useFloatingButton({
+	setShow: true,
+	setIcon: 'up',
+	clickEventFunc: () => {
+		console.log('position top');
+		window.scrollTo(0, 0);
+	},
+});
 
 const store = useStore();
 
@@ -122,10 +130,6 @@ const saveTodo = async () => {
 	if (result.data.resultCode == 200) {
 		searchNoticeList();
 	}
-};
-
-const clickttt = () => {
-	console.log('floating');
 };
 </script>
 
