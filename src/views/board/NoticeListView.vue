@@ -53,6 +53,7 @@ import ThePagination from '@/components/board/ThePagination.vue';
 import { ref, computed, watchEffect } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import { useFloatingButton } from '@/hooks/floatingButton';
 
 const router = useRouter();
 const store = useStore();
@@ -63,6 +64,14 @@ const listCount = computed(() => store.state.notice.count);
 const rowCount = ref(5);
 const nowPage = ref(1);
 const schTitle = ref('');
+
+useFloatingButton({
+	setShow: true,
+	setIcon: 'plus',
+	clickEventFunc: () => {
+		console.log('plus!');
+	},
+});
 
 // search 실행
 const searchNoticeList = (page = 1) => {
