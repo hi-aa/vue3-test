@@ -14,7 +14,8 @@ export default defineConfig({
 	server: {
 		proxy: {
 			'/system': {
-				target: 'http://192.168.0.166:8110',
+				target: 'http://192.168.0.109:8110',
+				// target: 'http://192.168.0.166:8110',
 				changeOrigin: true,
 			},
 		},

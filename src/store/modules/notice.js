@@ -1,4 +1,4 @@
-import api from '@/api/board';
+import api from '@/api/notice';
 
 // front-end 컴포넌트간의(<<) 데이터/상태 공유를 편하게 하기위해 상태관리 라이브러리를 사용함
 // ex) 장바구니 아이템 정보: 아이템 변경, 수량 변경 등등등
@@ -48,6 +48,7 @@ export default {
 					contents,
 					noticeYn,
 					hitCnt,
+					// likeYn,
 					regNm,
 					regDt,
 				}) => ({
@@ -57,6 +58,7 @@ export default {
 					contents,
 					noticeYn,
 					hitCnt,
+					// likeYn,
 					regNm,
 					regDt,
 				}))(item);
@@ -65,7 +67,29 @@ export default {
 			state.count = data.data.totCnt;
 		},
 		setNotice(state, response) {
-			state.item = { ...response.data.data };
+			// state.item = { ...response.data.data };
+			const temp = (({
+				compCd,
+				noticeNo,
+				title,
+				contents,
+				noticeYn,
+				hitCnt,
+				likeYn,
+				regNm,
+				regDt,
+			}) => ({
+				compCd,
+				noticeNo,
+				title,
+				contents,
+				noticeYn,
+				hitCnt,
+				likeYn,
+				regNm,
+				regDt,
+			}))(response.data.data);
+			state.item = temp;
 		},
 	},
 };

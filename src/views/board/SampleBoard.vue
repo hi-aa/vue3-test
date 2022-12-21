@@ -65,7 +65,7 @@
 
 <script setup>
 import CardContent from '@/components/board/CardContent.vue';
-import { fetchNoticeDetail, saveNotice } from '@/api/board';
+import { fetchNoticeDetail, saveNotice } from '@/api/notice';
 import { ref, computed, watchEffect } from 'vue';
 import { useStore } from 'vuex';
 

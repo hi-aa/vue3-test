@@ -2,7 +2,20 @@
 	<div class="detailed_tit">
 		<p>Date : {{ form.regDt }}</p>
 		<h2>{{ form.title }}</h2>
-		<p class="name">작성자: {{ form.regId }}</p>
+		<p class="name">작성자: {{ form.regNm }}</p>
+		<div class="button_wrap">
+			<button @click="visible" class="like">
+				<!-- :class="'Y' === form.likeYn ? 'fa-solid' : 'fa-regular'" -->
+				<i
+					class="fa-heart"
+					:class="{
+						'fa-solid': 'Y' === form.likeYn,
+						'fa-regular': 'Y' !== form.likeYn,
+					}"
+					@click="changeLike"
+				></i>
+			</button>
+		</div>
 	</div>
 	<div class="detailed_txt">
 		<p>{{ form.contents }}</p>
@@ -18,7 +31,7 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
 // import { fetchNoticeDetail } from '@/api/board.js';
-import { deleteNotice } from '@/api/board.js';
+import { deleteNotice, saveNotice } from '@/api/notice';
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 
@@ -33,6 +46,13 @@ const id = route.params.id;
 const form = computed(() => {
 	return store.state.notice.item;
 });
+// const changeClass = e => {
+// 	if (e.target.className === 'fa-regular fa-heart') {
+// 		e.target.className = 'fa-solid fa-heart';
+// 	} else {
+// 		e.target.className = 'fa-regular fa-heart';
+// 	}
+// };
 
 /* 상세 조회 */
 const getNoticeDetail = async () => {
@@ -60,6 +80,15 @@ const deleteNoticeDetail = async () => {
 		goListPage();
 	}
 };
+
+const changeLike = () => {
+	const keys = ['compCd', 'noticeNo', 'title', 'contents'];
+	let strParam = keys.map(key => `${key}=${form.value[key]}`).join('&');
+	strParam += '&newYn=N';
+	strParam += `&likeYn=${form.value.likeYn !== 'Y' ? 'Y' : 'N'}`;
+
+	saveNotice(strParam);
+};
 </script>
 
 <style scoped>
@@ -69,5 +98,37 @@ const deleteNoticeDetail = async () => {
 .detailed_tit .name {
 	/* margin-top: 10px; */
 	font-weight: 600;
+}
+.click_btn {
+	display: flex;
+	justify-content: space-between;
+}
+.click_btn button i {
+	transition: all 0.3s;
+	font-size: 25px;
+	margin-right: 30px;
+}
+.click_btn button i.fa-solid {
+	color: rgb(216, 83, 127);
+	animation: shakeHeart 0.5s ease-in-out forwards;
+}
+@keyframes shakeHeart {
+	0% {
+		transform: scale(1);
+	}
+	35% {
+		transform: scale(1.2) rotate(10deg);
+	}
+	70% {
+		transform: scale(1.2) rotate(-10deg);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+@media (max-width: 1000px) {
+	.detailed_btn {
+		margin-left: 0;
+	}
 }
 </style>

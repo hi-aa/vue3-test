@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-import { fetchNoticeDetail, saveNotice } from '@/api/board.js';
+import { fetchNoticeDetail, saveNotice } from '@/api/notice';
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 

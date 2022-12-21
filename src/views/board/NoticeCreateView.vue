@@ -47,7 +47,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { saveNotice } from '@/api/board.js';
+import { saveNotice } from '@/api/notice';
 
 const router = useRouter();
 const form = ref({});
