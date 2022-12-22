@@ -3,6 +3,9 @@
 		<div class="flip-card-inner" :class="{ 'selected-card': props.isSelected }">
 			<div class="flip-card-front inner_txt">
 				<p class="big_txt"><slot name="title"></slot></p>
+				<p class="rank">
+					<slot name="rank"></slot>
+				</p>
 				<p v-if="$slots.regnm" class="">
 					<slot name="regnm"></slot>
 				</p>
@@ -10,7 +13,7 @@
 			</div>
 			<div class="flip-card-back inner_txt">
 				<p class="big_txt"><slot name="title"></slot></p>
-				<p style="float: right">조회수: <slot name="hitcnt">0</slot></p>
+				<p style="float: right"><slot name="hitcnt">0</slot></p>
 				<p class="mid_txt contents"><slot name="contents"></slot></p>
 			</div>
 		</div>
@@ -75,6 +78,15 @@ const props = defineProps({
 .title {
 	font-size: large;
 	vertical-align: middle;
+}
+.rank {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	height: 170px;
+	color: white;
+	display: inline-block;
+	font-size: 150px;
 }
 .reg_date {
 	position: absolute;

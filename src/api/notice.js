@@ -1,26 +1,27 @@
-import axios from 'axios';
+// import axios from 'axios';
+import { api } from '.';
 const REG_ID = 'test';
 
 /** 목록 조회 */
 export function fetchNoticeList(params) {
-	return axios.get('/system/eOrderNotice/eOrderNoticeListData', {
+	return api.get('/system/eOrderNotice/eOrderNoticeListData', {
 		params: params,
 	});
 }
 /** 상세 조회 */
 export function fetchNoticeDetail(noticeNo) {
-	return axios.get('/system/eOrderNotice/eOrderNoticeDetailData', {
+	return api.get('/system/eOrderNotice/eOrderNoticeDetailData', {
 		params: { noticeNo: noticeNo, gubun: 'EOS' },
 	});
 }
 /** 저장 */
 export function saveNotice(strParam) {
 	strParam += `&regId=${REG_ID}`;
-	return axios.patch('/system/eOrderNotice/eOrderNoticeSaveData', strParam);
+	return api.patch('/system/eOrderNotice/eOrderNoticeSaveData', strParam);
 }
 /** 삭제 */
 export function deleteNotice(noticeNo) {
-	return axios.post(
+	return api.post(
 		'/system/eOrderNotice/eOrderNoticeDeleteData',
 		`regId=${REG_ID}&noticeNo=${noticeNo}`,
 	);

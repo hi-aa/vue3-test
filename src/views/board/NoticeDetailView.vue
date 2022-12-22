@@ -3,7 +3,7 @@
 		<p>Date : {{ form.regDt }}</p>
 		<h2>{{ form.title }}</h2>
 		<p class="name">작성자: {{ form.regNm }}</p>
-		<div class="button_wrap">
+		<div class="click_btn button_wrap">
 			<button @click="visible" class="like">
 				<!-- :class="'Y' === form.likeYn ? 'fa-solid' : 'fa-regular'" -->
 				<i

@@ -23,7 +23,7 @@
 						class="list"
 						:class="$route.path.indexOf(href) === 0 ? 'active' : ''"
 					>
-						<a class="nav-link" :href="href">게시판</a>
+						<a class="nav-link" :href="href">일별 박스오피스</a>
 					</li>
 				</RouterLink>
 			</ul>

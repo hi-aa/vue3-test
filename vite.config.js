@@ -18,6 +18,10 @@ export default defineConfig({
 				// target: 'http://192.168.0.166:8110',
 				changeOrigin: true,
 			},
+			'/kobisopenapi': {
+				target: 'http://www.kobis.or.kr',
+				changeOrigin: true,
+			},
 		},
 	},
 });
