@@ -26,6 +26,18 @@
 						<a class="nav-link" :href="href">영화 API</a>
 					</li>
 				</RouterLink>
+				<RouterLink
+					:to="{ name: 'SampleView', replace: true }"
+					custom
+					v-slot="{ href }"
+				>
+					<li
+						class="list"
+						:class="$route.path.indexOf(href) === 0 ? 'active' : ''"
+					>
+						<a class="nav-link" :href="href">뭐하지</a>
+					</li>
+				</RouterLink>
 			</ul>
 		</div>
 		<RouterView></RouterView>

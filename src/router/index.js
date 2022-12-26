@@ -11,6 +11,8 @@ import NoticeEdit from '@/views/board/notice/NoticeEditView.vue';
 import NoticeCreate from '@/views/board/notice/NoticeCreateView.vue';
 // 영화
 import MovieView from '@/views/board/movie/MovieView.vue';
+// sample
+import SampleView from '@/views/board/sample/SampleView.vue';
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -53,9 +55,14 @@ const router = createRouter({
 					component: NoticeCreate,
 				},
 				{
-					path: 'sample',
+					path: 'movie',
 					name: 'MovieView',
 					component: MovieView,
+				},
+				{
+					path: 'sample',
+					name: 'SampleView',
+					component: SampleView,
 				},
 			],
 		},
