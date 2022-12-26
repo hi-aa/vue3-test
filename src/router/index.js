@@ -5,12 +5,12 @@ import NotFound from '@/components/error/NotFound.vue';
 // 게시판 공통
 import BoardView from '@/views/board/BoardView.vue';
 // 공지사항
-import NoticeList from '@/views/board/NoticeListView.vue';
-import NoticeDetail from '@/views/board/NoticeDetailView.vue';
-import NoticeEdit from '@/views/board/NoticeEditView.vue';
-import NoticeCreate from '@/views/board/NoticeCreateView.vue';
-// 게시판
-import SampleBoard from '@/views/board/SampleBoard.vue';
+import NoticeList from '@/views/board/notice/NoticeListView.vue';
+import NoticeDetail from '@/views/board/notice/NoticeDetailView.vue';
+import NoticeEdit from '@/views/board/notice/NoticeEditView.vue';
+import NoticeCreate from '@/views/board/notice/NoticeCreateView.vue';
+// 영화
+import MovieView from '@/views/board/movie/MovieView.vue';
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -54,8 +54,8 @@ const router = createRouter({
 				},
 				{
 					path: 'sample',
-					name: 'SampleBoard',
-					component: SampleBoard,
+					name: 'MovieView',
+					component: MovieView,
 				},
 			],
 		},

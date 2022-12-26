@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import AppNav from '@/components/layout/AppNav.vue';
-import AppView from '@/components/layout/AppView.vue';
-import AppFooter from '@/components/layout/AppFooter.vue';
+import AppNav from '@/layout/AppNav.vue';
+import AppView from '@/layout/AppView.vue';
+import AppFooter from '@/layout/AppFooter.vue';
 </script>

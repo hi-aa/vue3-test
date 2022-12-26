@@ -15,7 +15,7 @@
 					</li>
 				</RouterLink>
 				<RouterLink
-					:to="{ name: 'SampleBoard', replace: true }"
+					:to="{ name: 'MovieView', replace: true }"
 					custom
 					v-slot="{ href }"
 				>
