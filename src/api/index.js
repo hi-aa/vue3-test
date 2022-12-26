@@ -1,26 +1,30 @@
 import axios from 'axios';
-import store from '@/store';
+import { useLoadingStore } from '@/store/loading';
 
 export const api = axios.create();
 
 api.interceptors.request.use(
 	function (config) {
-		store.dispatch('loading/setLoading', true);
+		const store = useLoadingStore();
+		store.setLoading(true);
 		return config;
 	},
 	function (error) {
-		store.dispatch('loading/setLoading', true);
+		const store = useLoadingStore();
+		store.setLoading(true);
 		return Promise.reject(error);
 	},
 );
 
 api.interceptors.response.use(
 	function (response) {
-		store.dispatch('loading/setLoading', false);
+		const store = useLoadingStore();
+		store.setLoading(false);
 		return response;
 	},
 	function (error) {
-		store.dispatch('loading/setLoading', false);
+		const store = useLoadingStore();
+		store.setLoading(false);
 		return Promise.reject(error);
 	},
 );

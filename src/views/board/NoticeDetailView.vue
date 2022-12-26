@@ -5,7 +5,6 @@
 		<p class="name">작성자: {{ form.regNm }}</p>
 		<div class="click_btn button_wrap">
 			<button @click="visible" class="like">
-				<!-- :class="'Y' === form.likeYn ? 'fa-solid' : 'fa-regular'" -->
 				<i
 					class="fa-heart"
 					:class="{
@@ -25,44 +24,21 @@
 		<button class="detailed_btn" @click="goEditPage">수정</button>
 		<button class="detailed_btn" @click="deleteNoticeDetail">삭제</button>
 	</div>
-	<!-- <div v-for="no in noticeList" :key="no.noticeNo">{{ no }}</div> -->
 </template>
 
 <script setup>
-import { useRoute, useRouter } from 'vue-router';
-// import { fetchNoticeDetail } from '@/api/board.js';
+import { useRouter } from 'vue-router';
+import { fetchNoticeDetail } from '@/api/notice.js';
 import { deleteNotice, saveNotice } from '@/api/notice';
-import { computed } from 'vue';
-import { useStore } from 'vuex';
+import { computed, toRef } from 'vue';
 
-const route = useRoute();
+const props = defineProps({ id: [String, Number] });
 const router = useRouter();
-const store = useStore();
-// const noticeList = computed(() => store.state.notice.items);
-// console.log(noticeList);
 
-const id = route.params.id;
-// const form = ref({});
+const id = toRef(props, 'id');
 const form = computed(() => {
-	return store.state.notice.item;
+	return fetchNoticeDetail(id);
 });
-// const changeClass = e => {
-// 	if (e.target.className === 'fa-regular fa-heart') {
-// 		e.target.className = 'fa-solid fa-heart';
-// 	} else {
-// 		e.target.className = 'fa-regular fa-heart';
-// 	}
-// };
-
-/* 상세 조회 */
-const getNoticeDetail = async () => {
-	// const response = await fetchNoticeDetail(id);
-	// // console.log(response.data.data);
-	// form.value = { ...response.data.data }; // 객체 복사해서 대입
-
-	store.dispatch('notice/getNotice', id);
-};
-getNoticeDetail();
 
 /* 목록 이동 */
 const goListPage = () => {

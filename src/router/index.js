@@ -40,6 +40,7 @@ const router = createRouter({
 					path: 'notice/:id',
 					name: 'NoticeDetail',
 					component: NoticeDetail,
+					props: true,
 				},
 				{
 					path: 'notice/:id/edit',

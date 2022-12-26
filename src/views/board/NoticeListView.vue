@@ -49,18 +49,17 @@
 <script setup>
 import ListContent from '@/components/board/ListContent.vue';
 import ThePagination from '@/components/board/ThePagination.vue';
-// import { fetchNoticeList } from '@/api/board.js';
 import { ref, computed, watchEffect } from 'vue';
-import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { useFloatingButton } from '@/hooks/floatingButton';
+import { useNoticeStore } from '@/store/notice';
 
 const router = useRouter();
-const store = useStore();
+const store = useNoticeStore();
 
 // 변수
-const noticeList = computed(() => store.state.notice.items);
-const listCount = computed(() => store.state.notice.count);
+const noticeList = computed(() => store.items);
+const listCount = computed(() => store.count);
 const rowCount = ref(5);
 const nowPage = ref(1);
 const schTitle = ref('');
@@ -83,7 +82,8 @@ const searchNoticeList = (page = 1) => {
 			endRow: startRow + rowCount.value - 1,
 			schTitle: schTitle.value,
 		};
-		store.dispatch('notice/getNoticeList', params);
+
+		store.getNoticeList(params);
 	} catch (error) {
 		console.log(error);
 	}

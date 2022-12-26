@@ -5,11 +5,13 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { useStore } from 'vuex';
+import { useLoadingStore } from '@/store/loading';
+import { storeToRefs } from 'pinia';
+// import { computed } from 'vue';
 
-const store = useStore();
-const loading = computed(() => store.state.loading.show);
+// const store = useLoadingStore();
+// const loading = computed(() => store.show);
+const { show: loading } = storeToRefs(useLoadingStore());
 </script>
 
 <style scoped>
