@@ -6,12 +6,12 @@ export const api = axios.create();
 api.interceptors.request.use(
 	function (config) {
 		const store = useLoadingStore();
-		store.setLoading(true);
+		store.show = true;
 		return config;
 	},
 	function (error) {
 		const store = useLoadingStore();
-		store.setLoading(true);
+		store.show = true;
 		return Promise.reject(error);
 	},
 );
@@ -19,12 +19,12 @@ api.interceptors.request.use(
 api.interceptors.response.use(
 	function (response) {
 		const store = useLoadingStore();
-		store.setLoading(false);
+		store.show = false;
 		return response;
 	},
 	function (error) {
 		const store = useLoadingStore();
-		store.setLoading(false);
+		store.show = false;
 		return Promise.reject(error);
 	},
 );

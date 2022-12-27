@@ -1,4 +1,5 @@
 <template>
+	<h2 class="header">Slide Image</h2>
 	<div class="slideshow-container">
 		<div
 			class="mySlides fade"
@@ -24,9 +25,6 @@
 			>&#10095;</a
 		>
 	</div>
-	<br />
-
-	<!-- The dots/circles -->
 	<div style="text-align: center">
 		<span
 			v-for="(item, index) in img_arr"
@@ -36,6 +34,23 @@
 			@click="selectedIndex = index"
 		></span>
 	</div>
+
+	<br />
+	<h2 style="display: inline-block; margin-right: 8px">Lorem Text</h2>
+	<button class="pause" @click="pause = true">
+		<i class="fa fa-light fa-pause"></i>
+	</button>
+	<button
+		class="play"
+		@click="
+			pause = false;
+			lorem = '';
+			typeWriter();
+		"
+	>
+		<i class="fa fa-light fa-play"></i>
+	</button>
+	<div style="font-size: 17px">{{ lorem }}</div>
 </template>
 
 <script setup>
@@ -52,13 +67,35 @@ const img_arr = [
 	{ src: '/images/test7.jpg', title: '7 caption' },
 	{ src: '/images/test8.jpg', title: '8 caption' },
 ];
+
+// infinite text typing
+const SAMPLE_TEXT = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+const lorem = ref('');
+const pause = ref(false);
+
+const typeWriter = (i = 0) => {
+	if (pause.value) return;
+
+	// console.log(i);
+	if (i < SAMPLE_TEXT.length) {
+		lorem.value += SAMPLE_TEXT[i];
+		i++;
+		setTimeout(() => typeWriter(i), 100);
+	} else {
+		setTimeout(() => {
+			lorem.value = '';
+			typeWriter(0);
+		}, 2000);
+	}
+};
+typeWriter(0);
 </script>
 
 <style scoped>
-* {
-	box-sizing: border-box;
+.header {
+	margin: 20px auto;
+	text-align: center;
 }
-
 /* Slideshow container */
 .slideshow-container {
 	position: relative;
@@ -156,5 +193,18 @@ const img_arr = [
 	to {
 		opacity: 1;
 	}
+}
+
+button {
+	margin: 0 4px;
+}
+.pause,
+.play {
+	border-radius: 50%;
+	background-color: #aaa;
+	border: none;
+	width: 30px;
+	height: 30px;
+	color: white;
 }
 </style>
