@@ -30,15 +30,39 @@
 import { useRouter } from 'vue-router';
 import { fetchNoticeDetail } from '@/api/notice.js';
 import { deleteNotice, saveNotice } from '@/api/notice';
-import { computed, toRef } from 'vue';
+import { ref, toRef } from 'vue';
 
 const props = defineProps({ id: [String, Number] });
 const router = useRouter();
 
-const id = toRef(props, 'id');
-const form = computed(() => {
-	return fetchNoticeDetail(id);
-});
+const id = toRef(props, 'id').value;
+const form = ref({});
+
+/* 상세 조회 */
+const getNoticeDetail = async () => {
+	const response = await fetchNoticeDetail(id);
+	const noticeInfo = (({
+		compCd,
+		noticeNo,
+		title,
+		contents,
+		noticeYn,
+		likeYn,
+		regDt,
+		regId,
+	}) => ({
+		compCd,
+		noticeNo,
+		title,
+		contents,
+		noticeYn,
+		likeYn,
+		regDt,
+		regId,
+	}))(response.data.data);
+	form.value = noticeInfo;
+};
+getNoticeDetail();
 
 /* 목록 이동 */
 const goListPage = () => {
@@ -57,13 +81,15 @@ const deleteNoticeDetail = async () => {
 	}
 };
 
-const changeLike = () => {
+/** 좋아요 버튼 */
+const changeLike = async () => {
 	const keys = ['compCd', 'noticeNo', 'title', 'contents'];
 	let strParam = keys.map(key => `${key}=${form.value[key]}`).join('&');
 	strParam += '&newYn=N';
 	strParam += `&likeYn=${form.value.likeYn !== 'Y' ? 'Y' : 'N'}`;
 
-	saveNotice(strParam);
+	await saveNotice(strParam);
+	getNoticeDetail();
 };
 </script>
 

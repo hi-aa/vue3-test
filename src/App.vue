@@ -3,9 +3,7 @@
 		<header>
 			<AppNav></AppNav>
 		</header>
-		<div class="container">
-			<AppView></AppView>
-		</div>
+		<AppView></AppView>
 
 		<footer>
 			<AppFooter></AppFooter>
@@ -19,10 +17,4 @@ import AppView from '@/layout/AppView.vue';
 import AppFooter from '@/layout/AppFooter.vue';
 </script>
 
-<style scoped>
-.container {
-	position: relative;
-	width: 100%;
-	height: 80vh;
-}
-</style>
+<style scoped></style>

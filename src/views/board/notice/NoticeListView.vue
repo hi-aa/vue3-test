@@ -16,13 +16,8 @@
 	<div class="content_inner">
 		<!-- 목록 -->
 		<ul id="list">
-			<li
-				class="loop_list"
-				v-for="(notice, index) in noticeList"
-				:key="notice.noticeNo"
-			>
+			<li class="loop_list" v-for="notice in noticeList" :key="notice.noticeNo">
 				<ListContent @click="goNoticeDetail(notice.noticeNo)">
-					<template #index>{{ index }}</template>
 					<template #title>{{ notice.title }}</template>
 					<template #contents>{{ notice.contents }}</template>
 					<template #day>{{ notice.regDt }}</template>

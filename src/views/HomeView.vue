@@ -1,15 +1,19 @@
 <template>
-	<div
-		class="max"
-		:class="{ 'bg-filter': show }"
-		@mouseover="show = true"
-		@mouseleave="show = false"
-	>
-		<Transition>
-			<div class="cover">
-				<button @click="goBoardPage" v-if="show" class="btn">GO TO LIST</button>
-			</div>
-		</Transition>
+	<div class="container">
+		<div
+			class="max"
+			:class="{ 'bg-filter': show }"
+			@mouseover="show = true"
+			@mouseleave="show = false"
+		>
+			<Transition>
+				<div class="cover">
+					<button @click="goBoardPage" v-if="show" class="btn">
+						GO TO LIST
+					</button>
+				</div>
+			</Transition>
+		</div>
 	</div>
 </template>
 
@@ -28,11 +32,11 @@ const goBoardPage = () => {
 </script>
 
 <style scoped>
-/* .container {
+.container {
 	position: relative;
 	width: 100%;
 	height: 80vh;
-} */
+}
 .max {
 	width: 100%;
 	height: 100%;

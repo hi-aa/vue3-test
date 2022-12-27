@@ -5,7 +5,6 @@
 				<slot name="title"></slot>
 			</p>
 			<p class="mid_txt">
-				Index: <slot name="index"></slot><br />
 				<slot name="contents"></slot>
 			</p>
 			<p v-if="$slots.day" class="sm_txt">
