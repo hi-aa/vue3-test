@@ -1,17 +1,38 @@
 <template>
 	<h2 class="header">Slide Image</h2>
+
+	<!-- rating pop -->
+	<!-- <Teleport to=".slideshow-container"> -->
+	<div
+		class="popup"
+		:style="{ top: `${mousePosition.y}px`, left: `${mousePosition.x}px` }"
+	>
+		<!-- :class="{ show: selectedIndex === 0 }" -->
+		<span class="popuptext">
+			<span
+				v-for="num in 5"
+				:key="num"
+				class="fa fa-star"
+				:class="{ checked: img_arr[selectedIndex].rating >= num }"
+			></span>
+		</span>
+		<!-- :class="{ checked: item.rating >= num }" -->
+	</div>
+	<!-- </Teleport> -->
+
+	<!-- 슬라이드 -->
 	<div class="slideshow-container">
 		<div
 			class="mySlides fade"
 			v-for="(item, index) in img_arr"
 			:key="index"
 			:class="{ active: index === selectedIndex }"
+			@mouseover="starPop(index)"
 		>
 			<div class="numbertext">{{ index + 1 }} / {{ img_arr.length }}</div>
-			<img :src="item.src" style="width: 100%" />
+			<img :src="item.src" style="width: 100%" @click="updateMousePosition" />
 			<div class="text">{{ item.title }}</div>
 		</div>
-
 		<a
 			class="prev"
 			@click="
@@ -25,6 +46,8 @@
 			>&#10095;</a
 		>
 	</div>
+
+	<!-- 슬라이드 버튼 -->
 	<div style="text-align: center">
 		<span
 			v-for="(item, index) in img_arr"
@@ -35,7 +58,7 @@
 		></span>
 	</div>
 
-	<br />
+	<!-- 텍스트 타이핑 -->
 	<h2 style="display: inline-block; margin-right: 8px">Lorem Text</h2>
 	<button class="pause" @click="pause = true">
 		<i class="fa fa-light fa-pause"></i>
@@ -51,27 +74,44 @@
 		<i class="fa fa-light fa-play"></i>
 	</button>
 	<div style="font-size: 17px">{{ lorem }}</div>
+
+	<hr />
+
+	<!-- <div class="star-group">
+		<span
+			v-for="num in 5"
+			:key="num"
+			class="fa fa-star"
+			:class="{ checked: img_arr[0].rating >= num }"
+		></span>
+		<span class="fa fa-star checked"></span>
+		<span class="fa fa-star checked"></span>
+		<span class="fa fa-star checked"></span>
+		<span class="fa fa-star"></span>
+		<span class="fa fa-star"></span> 
+	</div> -->
 </template>
 
 <script setup>
 import { ref } from 'vue';
 
+// slide image
 const selectedIndex = ref(0);
 const img_arr = [
-	{ src: '/images/test1.jpg', title: '1 caption' },
-	{ src: '/images/test2.jpg', title: '2 caption' },
-	{ src: '/images/test3.jpg', title: '3 caption' },
-	{ src: '/images/test4.jpg', title: '4 caption' },
-	{ src: '/images/test5.jpg', title: '5 caption' },
-	{ src: '/images/test6.jpg', title: '6 caption' },
-	{ src: '/images/test7.jpg', title: '7 caption' },
-	{ src: '/images/test8.jpg', title: '8 caption' },
+	{ src: '/images/test1.jpg', title: '1 caption', rating: 1 },
+	{ src: '/images/test2.jpg', title: '2 caption', rating: 2 },
+	{ src: '/images/test3.jpg', title: '3 caption', rating: 3 },
+	{ src: '/images/test4.jpg', title: '4 caption', rating: 4 },
+	{ src: '/images/test5.jpg', title: '5 caption', rating: 5 },
+	{ src: '/images/test6.jpg', title: '6 caption', rating: 4 },
+	{ src: '/images/test7.jpg', title: '7 caption', rating: 2 },
+	{ src: '/images/test8.jpg', title: '8 caption', rating: 3 },
 ];
 
 // infinite text typing
 const SAMPLE_TEXT = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
 const lorem = ref('');
-const pause = ref(false);
+const pause = ref(true);
 
 const typeWriter = (i = 0) => {
 	if (pause.value) return;
@@ -89,6 +129,18 @@ const typeWriter = (i = 0) => {
 	}
 };
 typeWriter(0);
+
+// star rating
+const mousePosition = ref({ x: 0, y: 0 });
+const updateMousePosition = e => {
+	mousePosition.value.x = e.clientX;
+	mousePosition.value.y = e.clientY;
+	console.log(mousePosition.value);
+};
+
+const starPop = index => {
+	console.log(index);
+};
 </script>
 
 <style scoped>
@@ -96,6 +148,10 @@ typeWriter(0);
 	margin: 20px auto;
 	text-align: center;
 }
+hr {
+	margin: 20px auto;
+}
+
 /* Slideshow container */
 .slideshow-container {
 	position: relative;
@@ -195,6 +251,7 @@ typeWriter(0);
 	}
 }
 
+/* typing */
 button {
 	margin: 0 4px;
 }
@@ -206,5 +263,69 @@ button {
 	width: 30px;
 	height: 30px;
 	color: white;
+}
+
+/* star rating */
+.checked {
+	color: orange;
+}
+/* Popup container */
+.popup {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+}
+
+/* The actual popup (appears on top) */
+.popup .popuptext {
+	width: 160px;
+	background-color: #555;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 8px 0;
+	position: absolute;
+	z-index: 1;
+	bottom: 125%;
+	left: 50%;
+	margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+	content: '';
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+	visibility: visible;
+	-webkit-animation: fadeIn 1s;
+	animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
 </style>
