@@ -7,7 +7,6 @@
 		class="popup"
 		:style="{ top: `${mousePosition.y}px`, left: `${mousePosition.x}px` }"
 	>
-		<!-- :class="{ show: selectedIndex === 0 }" -->
 		<span class="popuptext">
 			<span
 				v-for="num in 5"
@@ -16,7 +15,6 @@
 				:class="{ checked: img_arr[selectedIndex].rating >= num }"
 			></span>
 		</span>
-		<!-- :class="{ checked: item.rating >= num }" -->
 	</div>
 	<!-- </Teleport> -->
 
@@ -27,7 +25,6 @@
 			v-for="(item, index) in img_arr"
 			:key="index"
 			:class="{ active: index === selectedIndex }"
-			@mouseover="starPop(index)"
 		>
 			<div class="numbertext">{{ index + 1 }} / {{ img_arr.length }}</div>
 			<img :src="item.src" style="width: 100%" @click="updateMousePosition" />
@@ -74,22 +71,6 @@
 		<i class="fa fa-light fa-play"></i>
 	</button>
 	<div style="font-size: 17px">{{ lorem }}</div>
-
-	<hr />
-
-	<!-- <div class="star-group">
-		<span
-			v-for="num in 5"
-			:key="num"
-			class="fa fa-star"
-			:class="{ checked: img_arr[0].rating >= num }"
-		></span>
-		<span class="fa fa-star checked"></span>
-		<span class="fa fa-star checked"></span>
-		<span class="fa fa-star checked"></span>
-		<span class="fa fa-star"></span>
-		<span class="fa fa-star"></span> 
-	</div> -->
 </template>
 
 <script setup>
@@ -133,13 +114,9 @@ typeWriter(0);
 // star rating
 const mousePosition = ref({ x: 0, y: 0 });
 const updateMousePosition = e => {
-	mousePosition.value.x = e.clientX;
-	mousePosition.value.y = e.clientY;
+	mousePosition.value.x = e.pageX;
+	mousePosition.value.y = e.pageY;
 	console.log(mousePosition.value);
-};
-
-const starPop = index => {
-	console.log(index);
 };
 </script>
 
@@ -271,7 +248,7 @@ button {
 }
 /* Popup container */
 .popup {
-	position: relative;
+	position: absolute;
 	display: inline-block;
 	cursor: pointer;
 }
@@ -305,7 +282,7 @@ button {
 
 /* Toggle this class when clicking on the popup container (hide and show the popup) */
 .popup .show {
-	visibility: visible;
+	/* visibility: visible; */
 	-webkit-animation: fadeIn 1s;
 	animation: fadeIn 1s;
 }
