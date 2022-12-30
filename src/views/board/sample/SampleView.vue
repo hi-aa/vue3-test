@@ -1,8 +1,7 @@
 <template>
 	<h2 class="header">Slide Image</h2>
-
-	<!-- rating pop -->
-	<!-- <Teleport to=".slideshow-container"> -->
+	<h5 class="header">이미지를 클릭 시 팝업을 볼 수 있다.</h5>
+	<!-- 슬라이드 이미지 클릭 시 팝업 -->
 	<div
 		class="popup"
 		:style="{ top: `${mousePosition.y}px`, left: `${mousePosition.x}px` }"
@@ -16,7 +15,6 @@
 			></span>
 		</span>
 	</div>
-	<!-- </Teleport> -->
 
 	<!-- 슬라이드 -->
 	<div class="slideshow-container">
@@ -27,7 +25,7 @@
 			:class="{ active: index === selectedIndex }"
 		>
 			<div class="numbertext">{{ index + 1 }} / {{ img_arr.length }}</div>
-			<img :src="item.src" style="width: 100%" @click="updateMousePosition" />
+			<img :src="item.src" @click="updateMousePosition" />
 			<div class="text">{{ item.title }}</div>
 		</div>
 		<a
@@ -92,7 +90,7 @@ const img_arr = [
 // infinite text typing
 const SAMPLE_TEXT = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
 const lorem = ref('');
-const pause = ref(true);
+const pause = ref(true); // 일시정지
 
 const typeWriter = (i = 0) => {
 	if (pause.value) return;
@@ -116,13 +114,13 @@ const mousePosition = ref({ x: 0, y: 0 });
 const updateMousePosition = e => {
 	mousePosition.value.x = e.pageX;
 	mousePosition.value.y = e.pageY;
-	console.log(mousePosition.value);
+	// console.log(mousePosition.value);
 };
 </script>
 
 <style scoped>
 .header {
-	margin: 20px auto;
+	margin: 15px auto;
 	text-align: center;
 }
 hr {
